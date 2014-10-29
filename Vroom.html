@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vroom Vroom Car</title>
+        <meta name="keywords" content="Jin, Jinhyun, Lee, Karen, Qian, UVA, Univerisity, Virginia, Car, Game">
+    	<meta name="description" content="Simple addicting driving game">
+    	<meta name="author" content="Jinhyun Lee and Karen Qian"> 
+        <style type="text/css">
+			body {background-color:#BEFFA2;}
+			.title { 
+				font-family: Arial, Helvetica, sans-serif;
+				color:#FF5C5C;
+				font-size: 50px;
+				padding: 5px;
+				font-weight:bold;
+				text-shadow: 4px 4px 1px #A1A1A1;
+				text-align:center;	
+			}	
+			.main_container { /* contains everything else */
+				width:450px;
+				height:600px;
+				/* this centers the container*/
+				margin-left: auto;
+				margin-right: auto; 
+				background-color:#BDBDBD;	
+			}
+			.scores_container {
+				width:450px;
+				height:25px;
+				background-color:#B6B6B6;
+			}
+			.game_container {
+				width: 450px;
+				height: 500px;
+				background-color:#BDBDBD;
+			}		
+			.key_container{
+				height:75px;
+				width:450px;
+				background-color:yellow;
+			}
+			.scores {
+				width:223px;
+				background-color:white;
+				text-align:left;
+				float:left;
+				font-size:18px;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			.scores2 {
+				width:223px;
+				background-color:white;
+				text-align:left;
+				float:right;
+				font-size:18px;
+				color:#DFCB89;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			.key_speed {
+				font-size:28px;
+				width:180px;
+				height:75px;
+				text-align:center;
+				float:left;
+				line-height:75px;
+			}
+			.key_gas {
+				font-size:28px;
+				width:140px;
+				height:75px;
+				text-align:center;
+				float:left;
+				line-height:75px;
+			}
+			.key_key1 {
+				font-size: 12px;
+				text-align:left;
+				height:75px;
+				width:65px;
+				float:left;
+			}		
+			.key_key2 {
+				font-size: 12px;
+				text-align:left;
+				height:75px;
+				width:65px;
+				float:left;
+			}
+		</style>
+    </head>
+    <body>
+    	<!-- Title page -->
+    	<div class="title">
+        	Vroom Vroom
+            <!-- Logo Image -->
+            <img src="redcar.png" width="100px" height="60px">
+        </div>
+        <!-- This is the rest of the page -->
+        <div class="main_container"> 
+        	<!--score container -->  
+            <div class="scores_container">
+                <!-- Current score -->
+                <div class="scores" id="score">
+                    Current score: 
+                </div>
+                <!-- High score -->
+                <div class="scores2">
+                    High score:
+                </div>
+            </div>
+            <div class="game_container">
+                <!-- Game is generated here -->  
+                <!-- press spaebar to play -->
+                <img src="blank.png" id="mapImage" width="100%" height="100%">
+                
+                <!-- Lanes -->
+                <img src="blank.png" id="blockImage00" width="5px" height="50px" style="position:absolute; margin-top:-500px; margin-left:145px">
+                <img src="blank.png" id="blockImage01" width="5px" height="50px" style="position:absolute; margin-top:-500px; margin-left:222px">
+                <img src="blank.png" id="blockImage02" width="5px" height="50px" style="position:absolute; margin-top:-500px; margin-left:305px">
+                <img src="blank.png" id="blockImage10" width="5px" height="50px" style="position:absolute; margin-top:-400px; margin-left:145px">
+                <img src="blank.png" id="blockImage11" width="5px" height="50px" style="position:absolute; margin-top:-400px; margin-left:222px">
+                <img src="blank.png" id="blockImage12" width="5px" height="50px" style="position:absolute; margin-top:-400px; margin-left:305px">
+                <img src="blank.png" id="blockImage20" width="5px" height="50px" style="position:absolute; margin-top:-300px; margin-left:145px">
+                <img src="blank.png" id="blockImage21" width="5px" height="50px" style="position:absolute; margin-top:-300px; margin-left:222px">
+                <img src="blank.png" id="blockImage22" width="5px" height="50px" style="position:absolute; margin-top:-300px; margin-left:305px">
+                <img src="blank.png" id="blockImage30" width="5px" height="50px" style="position:absolute; margin-top:-200px; margin-left:145px">
+                <img src="blank.png" id="blockImage31" width="5px" height="50px" style="position:absolute; margin-top:-200px; margin-left:222px">
+                <img src="blank.png" id="blockImage32" width="5px" height="50px" style="position:absolute; margin-top:-200px; margin-left:305px">
+                <img src="blank.png" id="blockImage40" width="5px" height="50px" style="position:absolute; margin-top:-100px; margin-left:145px">
+                <img src="blank.png" id="blockImage41" width="5px" height="50px" style="position:absolute; margin-top:-100px; margin-left:222px">
+                <img src="blank.png" id="blockImage42" width="5px" height="50px" style="position:absolute; margin-top:-100px; margin-left:305px">
+                <img src="blank.png" id="blockImage50" width="5px" height="0px" style="position:absolute; margin-top:0px; margin-left:145px">
+                <img src="blank.png" id="blockImage51" width="5px" height="0px" style="position:absolute; margin-top:0px; margin-left:222px">
+                <img src="blank.png" id="blockImage52" width="5px" height="0px" style="position:absolute; margin-top:0px; margin-left:305px">
+                
+                <!-- obstacles -->
+                <img src="blank.png" id="objImage0" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage1" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage2" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage3" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage4" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage5" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage6" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage7" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px"> 
+                <img src="blank.png" id="objImage8" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage9" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage10" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage11" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage12" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage13" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage14" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px">
+                <img src="blank.png" id="objImage15" width="0px" height="0px" style="position:absolute; margin-top:-500px;  margin-left:75px"> 
+                
+                <!-- car -->
+                <img src="blank.png" id="carImage" width="60px" height="90px"  style="position:absolute; margin-top:-100px; margin-left:315px">
+                
+                <script type = "text/javascript">
+				
+//NEEDS FIX		 ===============================================================================================
+					var speed = 2000;
+					var objectChance = 0;
+					//how fast every object moves (by pixel)
+					var velocity = 2;
+//==============================================================================================================	
+
+					//Chance ===================================================================================
+					var objectChance0 = 70;
+					var objectChance1 = objectChance0 + 25;
+					var objectChance2 = objectChance1 + 4;
+					var objectChance3 = objectChance2 + 1;
+					var objectTypeChance0 = 10; // rocket
+					var objectTypeChance1 = objectTypeChance0 + 25; // Banana
+					var objectTypeChance2 = objectTypeChance1 + 25; // cow
+					var objectTypeChance3 = objectTypeChance2 + 20; // Gas
+					var objectTypeChance4 = objectTypeChance3 + 20; // Nail		
+							
+					//Game attribute
+					var gameStart = false;
+					var gameover = false;
+					var gameExtremeHeight = -550; //Where lanes start
+					var gameHeight = -500; //Game section size
+					var position = ["75px", "155px", "235px", "315px"]; //4 lanes
+								
+					// Car attribute ===========================================================================
+					var gas = 30;
+					var points = 0;
+					var carHeight = -100; //Car height by pixel relative to the section
+					var carPosition = 3; //Lanes
+					var carElement = document.getElementById("carImage"); //global Car variable	
+					var endPosition = "315px"; //End position once left/right is clicked
+									
+					//on a rocket and while on a rocket ========================================================
+					var rocketIsCalled = false; //rocket function is called or not
+					var onRocket = false; //is currently flying
+								
+					//make sure it is called only once
+					var justOnceGameover = true;
+					var justOnceGameoverAtspeedIncrease = true;
+
+					//Object attributes ========================================================================
+					var nextNum = 0; //Which number 
+					//Object sizes
+					var objSizeX = "30px";
+					var objSizeY = "45px";
+					var objectSmallX = "30px";
+					var objectSmallY = "45px";
+					var objectLargeX = "60px";
+					var objectLargeY = "90px";					
+					//at most 16 elements are available at a time
+					var element = [document.getElementById("objImage0"), document.getElementById("objImage1"),
+								document.getElementById("objImage2"), document.getElementById("objImage3"), 
+								document.getElementById("objImage4"), document.getElementById("objImage5"), 
+								document.getElementById("objImage6"), document.getElementById("objImage7"),
+								document.getElementById("objImage8"), document.getElementById("objImage9"),
+								document.getElementById("objImage10"), document.getElementById("objImage11"),
+								document.getElementById("objImage12"), document.getElementById("objImage13"),
+								document.getElementById("objImage14"), document.getElementById("objImage15")];
+					var maxSize = 16;			
+					//(Obj num, on screen, lane position, left - middle - right)
+					var elemInfo = ["0b00", "0b00", "0b00", "0b00",
+									"0b00", "0b00", "0b00", "0b00",
+									"0b00", "0b00", "0b00", "0b00",
+									"0b00", "0b00", "0b00", "0b00"];
+							
+					//initialize intervals so it is global =====================================================
+					var createObjectInterval = window.setInterval(nothing, 100000);
+					var moveObjectInterval = window.setInterval(nothing, 100000);
+					var speedIncreaseInterval = window.setInterval(nothing, 100000);
+					var flyingInterval = window.setInterval(nothing, 100000);
+					var carAnimateInterval = window.setInterval(nothing, 100000);
+					var gasDecreaseInterval = window.setInterval(nothing, 100000);
+					var generateGasInterval = window.setInterval(nothing, 1000000);
+					function nothing() {} 	//literally does nothing, but is needed
+					
+					
+					//Speed is increasing at a time ============================================================
+					function speedIncrease() {
+						if (!onRocket) { //if it is on the rocket, nothing is generated
+							window.clearInterval(createObjectInterval);
+							window.clearInterval(moveObjectInterval);
+//NEEDS FIX							
+							if (speed >= 200) {
+								speed = speed - 100;
+							}
+							if (objectChance0 > 10) {
+								objectChance0--;
+							}
+//NEEDS FIX		
+							if (!gameover) { //If the game is not over, create object and move the object				
+								createObjectInterval = window.setInterval(createObject, speed/2);
+								moveObjectInterval = window.setInterval(moveAll, (speed/100));
+							}
+							else {
+								if (justOnceGameoverAtspeedIncrease) { //gameOver is not called more than once.
+									gameOver();
+									justOnceGameoverAtspeedIncrease = false;
+								}
+							}
+						}
+					}
+					
+					function gasDecrease() {
+						if (!onRocket) {
+							gas--;
+						}
+					}
+					
+					function generateGas() {
+						if (!onRocket) {
+							makeObject(3, Math.floor(Math.random()*4));	
+						}
+					}
+		
+					//Game Over ================================================================================
+					function gameOver() {
+						if (justOnceGameover) { //Makes sure game over is not called twice
+							//speed and gas is reset to 0
+							document.getElementById("speed").innerHTML = "0mph";
+							document.getElementById("tank").innerHTML = " " + gas + "gal";	
+							//all time intervals are deleted.
+							window.clearInterval(speedIncreaseInterval);
+							window.clearInterval(createObjectInterval);
+							window.clearInterval(moveObjectInterval);
+							window.clearInterval(flyingInterval);
+							window.clearInterval(carAnimateInterval);
+							window.clearInterval(gasDecreaseInterval);
+							window.clearInterval(generateGasInterval);
+							justOnceGameover = false;
+							facebookIt(); //Share on facebook
+						}
+					}
+
+//Working on it					
+					//share on facebook ========================================================================
+					function facebookIt() {
+						alert("GG");
+					}
+				
+					//EventListener for Space, Left, Right =====================================================
+					document.addEventListener("keydown", function(event) {
+						if (!onRocket && !gameover) { //moves only when not on a rocket and game is not ended
+							if (event.keyCode == 32 && !gameStart) {
+								document.getElementById("mapImage").src="road.png";
+								document.getElementById("carImage").src="car.png";
+								gameStart = true;
+								for (var i = 0; i < 6; i++) {
+									for (var j = 0 ; j < 3; j++) {
+										document.getElementById("blockImage"+i+""+j).src="blocks.png";
+									}
+								}
+								speedIncrease();
+								window.clearInterval(gasDecreaseInterval);
+								window.clearInterval(generateGasInterval);
+								window.clearInterval(speedIncreaseInterval);
+								speedIncreaseInterval = window.setInterval(speedIncrease, 5000);
+								gasDecreaseInterval = window.setInterval(gasDecrease, 3000);
+								generateGasInterval = window.setInterval(generateGas, 14000);
+							}
+							if (event.keyCode == 37) {
+								leftArrowPressed();
+							}
+							if (event.keyCode == 39) {
+								rightArrowPressed();
+							}
+						}
+					}, false);
+				
+					//Left arrow pressed =======================================================================
+					function leftArrowPressed() {
+						if (carElement.style.marginLeft == position[1]) {
+							carAnimateInterval = window.setInterval(animateCar, 20);
+							endPosition = position[0];
+							carPosition = 0
+						}
+						else if (carElement.style.marginLeft == position[2]) {
+							carAnimateInterval = window.setInterval(animateCar, 20);
+							endPosition = position[1];
+							carPosition = 1;
+						}
+						else if (carElement.style.marginLeft == position[3]) {
+							carAnimateInterval = window.setInterval(animateCar, 20);
+							endPosition = position[2];
+							carPosition = 2;
+						}
+					}
+			
+					//Right arrow pressed ======================================================================
+					function rightArrowPressed() {
+						if (carElement.style.marginLeft == position[0]) {
+							carAnimateInterval = window.setInterval(animateCar, 20);
+							endPosition = position[1];
+							carPosition = 1;
+						}
+						else if (carElement.style.marginLeft == position[1]) {
+							carAnimateInterval = window.setInterval(animateCar, 20);
+							endPosition = position[2];
+							carPosition = 2;
+						}
+						else if (carElement.style.marginLeft == position[2]) {
+							carAnimateInterval = window.setInterval(animateCar, 20);
+							endPosition = position[3];
+							carPosition = 3;
+						}
+					}
+				
+					//Animate car going left and right =========================================================
+					function animateCar() {
+						var finishPosition = parseInt((endPosition).replace(/px/,""));
+						var currentLocation = parseInt((carElement.style.marginLeft).replace(/px/,""));
+						if (currentLocation > finishPosition) {
+							if (currentLocation - 30 < finishPosition) {
+								carElement.style.marginLeft = finishPosition+"px";
+								window.clearInterval(carAnimateInterval);
+							}
+							else {
+								carElement.style.marginLeft = currentLocation - 30 +"px";
+							}
+						}
+						else {
+							if (currentLocation + 30 > finishPosition) {
+								carElement.style.marginLeft = finishPosition+"px";
+								window.clearInterval(carAnimateInterval);
+							}
+							else {
+								carElement.style.marginLeft = currentLocation + 30 + "px";
+							}
+						}	
+					}
+									
+					//Creates 0, 1, 2, or 3 objects based on some percentage ===================================
+					function createObject() {
+						var howMany = Math.random()*objectChance3;
+						if (howMany < objectChance0) { 
+						}
+						else if (howMany < objectChance1) {
+							create1Object();
+						}
+						else if (howMany < objectChance2) {
+							create2Object();
+						}
+						else {
+							create3Object();
+						}
+					}
+								
+					//Randomly gets object number ==============================================================
+					function getObjectNum() {
+						var num = (Math.random()*objectTypeChance4);
+						if (num < objectTypeChance0) {
+							return 0;
+						}
+						else if (num < objectTypeChance1) {
+							return 1;
+						}
+						else if (num < objectTypeChance2) {
+							return 2;
+						}
+						else if (num < objectTypeChance3) {
+							return 3;
+						}
+						else {
+							return 4;
+						}		
+					}
+				
+					//Gets the object Dimension ================================================================
+					function getObjectDim(num) {
+						if (num == 2) {
+							objSizeX = objectLargeX;
+							objSizeY = objectLargeY;
+						}
+						else {
+							objSizeX = objectSmallX;
+							objSizeY = objectSmallY;
+						}
+					}
+		
+					//Makes object given object number =========================================================
+					function makeObject(num, pos) {
+						element[nextNum].src ="obj"+num+".png";
+						element[nextNum].style.width = objSizeX;
+						element[nextNum].style.height = objSizeY;
+						element[nextNum].style.marginLeft = position[pos];
+						element[nextNum].style.marginTop = gameHeight+"px";
+						var randomNum = 0;
+						if (num != 2) {
+							randomNum = Math.floor(Math.random()*3);
+							element[nextNum].style.marginLeft = 
+								parseInt((element[nextNum].style.marginLeft).replace(/px/,"")) 
+								+ (randomNum * 15) + "px";
+						}
+						elemInfo[nextNum] = num + "a" + pos + "" + randomNum;
+						nextNum++;
+						nextNum %= (maxSize-1);	
+					}
+									
+					//Creates 1 object =========================================================================
+					function create1Object() {
+						var num = getObjectNum();
+						var pos = Math.floor(Math.random()*4);
+						getObjectDim(num);
+						makeObject(num, pos);
+					}
+						
+					//Creates 2 objects ========================================================================
+					function create2Object() {
+						var num1 = getObjectNum();
+						var pos1 = Math.floor(Math.random()*4);
+						getObjectDim(num1);
+						makeObject(num1, pos1);
+						
+						var num2 = getObjectNum();
+						var pos2 = (pos1 +  Math.floor(Math.random()*3)+1)%4;
+						getObjectDim(num2);
+						makeObject(num2, pos2);	
+					}
+								
+					//Creates 3 objects ========================================================================
+					function create3Object() {
+						var blankPosition = Math.floor(Math.random()*4);
+						var pos1 = (blankPosition+1)%4;
+						var pos2 = (blankPosition+2)%4;
+						var pos3 = (blankPosition+3)%4;
+						
+						var num1 = getObjectNum();
+						getObjectDim(num1);
+						makeObject(num1, pos1);
+						
+						var num2 = getObjectNum();
+						getObjectDim(num2);
+						makeObject(num2, pos2);
+						
+						var num3 = getObjectNum();
+						getObjectDim(num3);
+						makeObject(num3, pos3);
+					}
+					
+					//Calls move lane and move object ==========================================================
+					function moveAll() {
+						moveLane();
+						points += velocity;
+						for (var i = 0; i < maxSize; i++) {
+							if (elemInfo[i].substring(1,2) == "a") {
+								moveObject(i);
+							}
+						}
+						document.getElementById("score").innerHTML = " " + points;
+						document.getElementById("tank").innerHTML = " " + gas + "gal";	
+						document.getElementById("speed").innerHTML = " " + velocity*10 + "mph";
+						if (gas <= 0 ) {
+							gas = 0;
+							gameover = true;
+							gameOver();
+						}
+					}
+
+					//Move lane ================================================================================
+					function moveLane() {
+						for (var i = 0; i < 6; i++) {
+							for (var j = 0; j< 3; j++) {
+								var marginTopBlock = parseInt((document.getElementById("blockImage"+i+""+j).
+									style.marginTop).replace(/px/,""));
+								var clientHeight = parseInt(document.getElementById("blockImage"+i+""+j).
+									clientHeight);
+								//PReload image
+								if (marginTopBlock > gameHeight && marginTopBlock < gameHeight + 100 
+									&& clientHeight < 50) {
+										document.getElementById("blockImage"+i+""+j).style.height = 
+											clientHeight+velocity+"px";
+								}
+								//if done preloading
+								else {
+									if (clientHeight > 50) {
+										document.getElementById("blockImage"+i+""+j).style.marginTop = 
+											marginTopBlock+clientHeight - 50+"px";
+									}
+										
+									if (marginTopBlock < (gameHeight + 50)) {
+										document.getElementById("blockImage"+i+""+j).style.height = "50px";
+									}
+									//Until it hits 0,
+									if (marginTopBlock < 0) {
+										document.getElementById("blockImage"+i+""+j).style.marginTop = 
+											marginTopBlock+velocity+"px";
+										//starting at 50, make the lane smaller,
+										if (marginTopBlock > -50) {
+											document.getElementById("blockImage"+i+""+j).style.height = 
+												clientHeight-velocity+"px";
+										}
+										
+									}
+									//it it goes over 0, based on how much it goes over, start from there
+									else {
+										document.getElementById("blockImage"+i+""+j).style.height = "0px";
+										document.getElementById("blockImage"+i+""+j).style.marginTop = 
+											marginTopBlock+gameExtremeHeight+"px";
+									}
+								}				
+							}
+						}
+					}	
+					
+					//Move object ==============================================================================
+					function moveObject(num) {
+						//if It is still in game frame
+						if (!collisionDetectionFrame(num)) {
+						//if collided
+							if (collisionDetectionCar(num)) {
+								resetObject(num);
+								//collision effect
+								collided(num);
+							}
+							//if it didn't collide
+							else {
+								element[num].style.marginTop =  (parseInt((element[num].style.marginTop).
+									replace(/px/,""))+velocity)+"px";
+							}
+						}
+						else {
+							resetObject(num);
+						}
+					}
+					
+					//Collision detection for frame ============================================================
+					function collisionDetectionFrame(num) {
+						if (parseInt(elemInfo[num].substring(0,1)) == 2) {
+							if (parseInt((element[num].style.marginTop).replace(/px/,"")) <= carHeight) {
+								//not collided with frame
+								return false;
+							}
+							else 
+								return true;
+						}
+						else {
+							if (parseInt((element[num].style.marginTop).replace(/px/,"")) <= carHeight + 45) {
+								//not collided with frame
+								return false;
+							}
+							else 
+								return true;
+						}
+					}
+					
+					//Collision detection for car ==============================================================
+					function collisionDetectionCar(num) {
+						if (parseInt(elemInfo[num].substring(0,1)) == 2) {
+							if ((parseInt((element[num].style.marginTop).replace(/px/,""))>= carHeight - 90) && 
+									carPosition == parseInt(elemInfo[num].substring(2,3))) {
+								//collided with car
+								return true;
+							}
+							return false;
+						}
+						else {
+							if ((parseInt((element[num].style.marginTop).replace(/px/,""))>= carHeight - 45 )&& 
+									carPosition == parseInt(elemInfo[num].substring(2,3))) {
+								//collided with car
+								return true;
+							}
+							return false;
+						}
+					}
+					
+					//Collision reset ==========================================================================
+					function resetObject(num) {
+						element[num].style.width = "0px";
+						element[num].style.height = "0px";
+						element[num].style.marginTop = gameHeight + "px";
+						elemInfo[num] = elemInfo[num].replace(/a/,"b");
+					}
+					
+					//If it collides with car ==================================================================
+					function collided(num) {
+						if (!onRocket) {
+							var collideNum = parseInt(elemInfo[num].substring(0,1));
+							switch (collideNum) {
+								case 0:
+									points += 1000;
+									intoRocket();
+									break;
+								case 1:
+									points += 200;
+									var rand = Math.floor(Math.random()*5);
+									if (rand >= 3)  {
+										leftArrowPressed()
+									}
+									else if (rand <= 1) {
+										rightArrowPressed();
+									}
+									break;
+								case 2:
+									gameover = true;
+									gameOver();
+									break;
+								case 3:
+									points += 300;
+									gas += 5;
+									break;
+								case 4:
+									points += 300;
+									gas -= 10;
+									break;
+							}
+						}
+					}
+					
+					//You are on a rocket ======================================================================
+					function intoRocket() {
+						rocketIsCalled = true;
+						window.clearInterval(createObjectInterval);
+						window.clearInterval(moveObjectInterval);
+						window.clearInterval(flyingInterval);
+						fly();
+						flyingInterval = window.setInterval(fly, 2000);
+						onRocket = true;
+					}
+					//Now you are flying until fly is called again. (once to fly, twice to come down) ==========
+					function fly() {
+						if (rocketIsCalled) {
+							carElement.style.marginTop = carHeight - 25 + "px";
+							velocity = Math.floor(velocity * 3);
+							moveObjectInterval = window.setInterval(moveAll, 2);
+							rocketIsCalled = false;
+						}
+						else {
+							window.clearInterval(flyingInterval);
+							window.clearInterval(moveObjectInterval);
+							carElement.style.marginTop = carHeight + "px";
+							velocity = Math.floor(velocity / 3);
+							onRocket = false;
+							createObjectInterval = window.setInterval(createObject, speed);
+							moveObjectInterval = window.setInterval(moveAll, Math.floor(speed/200));
+						}	
+					}			
+				</script>	
+            </div>
+            <!-- speedometer -->
+            <div class="key_container">
+                <!-- Keys are generated here -->
+                <div class="key_gas" id="tank">
+                </div>
+                <div class="key_key1">
+                    <img src="obj3.png" width="10px" height="20px"> Gas <br>
+                    <img src="obj0.png" width="10px" height="20px"> Rocket <br>
+                    <img src="obj2.png" width="10px" height="20px"> Cow <br>
+                </div>
+                <div class="key_key2">
+                 	<img src="obj4.png" width="10px" height="20px"> Nail <br>
+                    <img src="obj1.png" width="10px" height="20px"> Banana <br>
+                </div>
+                <div class="key_speed" id = "speed">
+                	
+                </div>
+                
+            </div>  
+        </div>
+    </body>
+</html>
